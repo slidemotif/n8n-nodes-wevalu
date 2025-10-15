@@ -1,4 +1,4 @@
-# n8n-nodes-wevalu
+# @wevalu/n8n-nodes-wevalu
 
 This is an n8n community node. It lets you use WeValu in your n8n workflows.
 
@@ -20,13 +20,13 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 1. Go to **Settings** > **Community Nodes**
 2. Select **Install**
-3. Enter `n8n-nodes-wevalu` in **Enter npm package name**
+3. Enter `@wevalu/n8n-nodes-wevalu` in **Enter npm package name**
 4. Agree to the risks and install
 
 ### Manual Installation
 
 ```bash
-npm install n8n-nodes-wevalu
+npm install @wevalu/n8n-nodes-wevalu
 ```
 
 ## Operations
@@ -71,8 +71,6 @@ To use this node, you need a WeValu API Key:
 ## Resources
 
 * [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
-* [WeValu Documentation](https://docs.wevalu.io/)
-* [WeValu API Documentation](https://docs.wevalu.io/integrations/api-key)
 
 ## License
 
