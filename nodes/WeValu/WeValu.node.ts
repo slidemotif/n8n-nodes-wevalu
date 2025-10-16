@@ -32,7 +32,7 @@ export class WeValu implements INodeType {
 		icon: { light: 'file:wevalu.svg', dark: 'file:wevalu.svg' },
 		group: ['transform'],
 		version: 1,
-		description: 'WeValu integrations',
+		description: 'Interact with the WeValu API',
 		defaults: {
 			name: 'WeValu',
 		},
