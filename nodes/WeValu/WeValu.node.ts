@@ -16,7 +16,7 @@ import type {
     SummaryApiResponse,
     SummaryData,
     WeValuCredentials,
-} from '../types';
+} from './types';
 
 const DEFAULT_BASE_URL = 'https://api.wevalu.io';
 const BATCH_SIZE = 100;
@@ -25,16 +25,16 @@ const API_EVALUATIONS_SUMMARY_PATH = '/api/integrations/evaluations/summary';
 const ERROR_PREFIX = 'WeValu API';
 const DEFAULT_ERROR_MESSAGE = 'Unknown error occurred';
 
-export class WeValuEvaluations implements INodeType {
+export class WeValu implements INodeType {
     description: INodeTypeDescription = {
-        displayName: 'WeValu Evaluations',
-        name: 'weValuEvaluations',
+        displayName: 'WeValu',
+        name: 'weValu',
         icon: { light: 'file:wevalu.svg', dark: 'file:wevalu.svg' },
         group: ['transform'],
         version: 1,
-        description: 'Fetch and manage evaluations from WeValu',
+        description: 'WeValu integrations',
         defaults: {
-            name: 'WeValu Evaluations',
+            name: 'WeValu',
         },
         inputs: [NodeConnectionTypes.Main],
         outputs: [NodeConnectionTypes.Main],
@@ -46,19 +46,19 @@ export class WeValuEvaluations implements INodeType {
             },
         ],
         properties: [
+            // Resource selector
             {
                 displayName: 'Resource',
                 name: 'resource',
                 type: 'options',
                 noDataExpression: true,
                 options: [
-                    {
-                        name: 'Evaluation',
-                        value: 'evaluation',
-                    },
+                    { name: 'Evaluations', value: 'evaluations' },
                 ],
-                default: 'evaluation',
+                default: 'evaluations',
             },
+
+            // Operation
             {
                 displayName: 'Operation',
                 name: 'operation',
@@ -66,7 +66,7 @@ export class WeValuEvaluations implements INodeType {
                 noDataExpression: true,
                 displayOptions: {
                     show: {
-                        resource: ['evaluation'],
+                        resource: ['evaluations'],
                     },
                 },
                 options: [
@@ -85,13 +85,15 @@ export class WeValuEvaluations implements INodeType {
                 ],
                 default: 'getAll',
             },
+
+            // Options for getAll
             {
                 displayName: 'Return All',
                 name: 'returnAll',
                 type: 'boolean',
                 displayOptions: {
                     show: {
-                        resource: ['evaluation'],
+                        resource: ['evaluations'],
                         operation: ['getAll'],
                     },
                 },
@@ -104,7 +106,7 @@ export class WeValuEvaluations implements INodeType {
                 type: 'number',
                 displayOptions: {
                     show: {
-                        resource: ['evaluation'],
+                        resource: ['evaluations'],
                         operation: ['getAll'],
                         returnAll: [false],
                     },
@@ -123,7 +125,7 @@ export class WeValuEvaluations implements INodeType {
                 default: {},
                 displayOptions: {
                     show: {
-                        resource: ['evaluation'],
+                        resource: ['evaluations'],
                         operation: ['getAll'],
                     },
                 },
@@ -163,11 +165,10 @@ export class WeValuEvaluations implements INodeType {
         const apiKey = credentials.apiKey;
         const baseUrl = (credentials.baseUrl || DEFAULT_BASE_URL).replace(/\/$/, '');
 
-        // Get operation parameters (same for all items)
+        // Get selected resource and operation
         const resource = this.getNodeParameter('resource', 0) as string;
         const operation = this.getNodeParameter('operation', 0) as string;
 
-        // Helper function to create request options
         const createRequestOptions = (
             path: string,
             queryParams?: IDataObject,
@@ -181,7 +182,6 @@ export class WeValuEvaluations implements INodeType {
             json: true,
         });
 
-        // Helper function to build query parameters
         const buildQueryParams = (
             options: EvaluationOptions,
             limit?: number,
@@ -210,7 +210,6 @@ export class WeValuEvaluations implements INodeType {
             return params;
         };
 
-        // Helper function to fetch all evaluations with pagination
         const fetchAllEvaluations = async (
             options: EvaluationOptions,
         ): Promise<EvaluationItem[]> => {
@@ -232,8 +231,8 @@ export class WeValuEvaluations implements INodeType {
                     offset += BATCH_SIZE;
                 } catch (error) {
                     const errorMessage = error instanceof Error ? error.message : DEFAULT_ERROR_MESSAGE;
-                    throw new NodeApiError(this.getNode(), error as JsonObject, { 
-                        message: `${ERROR_PREFIX}: ${errorMessage}` 
+                    throw new NodeApiError(this.getNode(), error as JsonObject, {
+                        message: `${ERROR_PREFIX}: ${errorMessage}`
                     });
                 }
             }
@@ -241,7 +240,6 @@ export class WeValuEvaluations implements INodeType {
             return allItems;
         };
 
-        // Helper function to fetch evaluations with limit
         const fetchEvaluations = async (
             options: EvaluationOptions,
             limit: number,
@@ -254,13 +252,12 @@ export class WeValuEvaluations implements INodeType {
                 return response.data || response;
             } catch (error) {
                 const errorMessage = error instanceof Error ? error.message : DEFAULT_ERROR_MESSAGE;
-                throw new NodeApiError(this.getNode(), error as JsonObject, { 
-                    message: `${ERROR_PREFIX}: ${errorMessage}` 
+                throw new NodeApiError(this.getNode(), error as JsonObject, {
+                    message: `${ERROR_PREFIX}: ${errorMessage}`
                 });
             }
         };
 
-        // Helper function to fetch evaluation summary
         const fetchEvaluationSummary = async (): Promise<SummaryData | SummaryApiResponse> => {
             const requestOptions = createRequestOptions(API_EVALUATIONS_SUMMARY_PATH);
 
@@ -269,13 +266,12 @@ export class WeValuEvaluations implements INodeType {
                 return response.data || response;
             } catch (error) {
                 const errorMessage = error instanceof Error ? error.message : DEFAULT_ERROR_MESSAGE;
-                throw new NodeApiError(this.getNode(), error as JsonObject, { 
-                    message: `${ERROR_PREFIX}: ${errorMessage}` 
+                throw new NodeApiError(this.getNode(), error as JsonObject, {
+                    message: `${ERROR_PREFIX}: ${errorMessage}`
                 });
             }
         };
 
-        // Helper function to process response data
         const processResponseData = (responseData: unknown): INodeExecutionData[] => {
             if (Array.isArray(responseData)) {
                 return responseData.map((item: EvaluationItem) => ({ json: item as IDataObject }));
@@ -283,24 +279,20 @@ export class WeValuEvaluations implements INodeType {
 
             if (responseData && typeof responseData === 'object') {
                 const data = responseData as EvaluationsEnvelope | SummaryData;
-                
-                // Check if response contains evaluations array
-                if ('evaluations' in data && Array.isArray(data.evaluations)) {
-                    return data.evaluations.map((item: EvaluationItem) => ({ json: item as IDataObject }));
+                if ('evaluations' in data && Array.isArray((data as EvaluationsEnvelope).evaluations)) {
+                    return (data as EvaluationsEnvelope).evaluations!.map((item: EvaluationItem) => ({ json: item as IDataObject }));
                 }
-                
                 return [{ json: data as IDataObject }];
             }
 
             return [];
         };
 
-        // Process each input item
         for (let i = 0; i < items.length; i++) {
             try {
                 let responseData: unknown;
 
-                if (resource === 'evaluation') {
+                if (resource === 'evaluations') {
                     switch (operation) {
                         case 'getAll': {
                             const returnAll = this.getNodeParameter('returnAll', i) as boolean;
@@ -314,21 +306,17 @@ export class WeValuEvaluations implements INodeType {
                             }
                             break;
                         }
-
                         case 'getSummary': {
                             responseData = await fetchEvaluationSummary();
                             break;
                         }
-
                         default:
                             throw new NodeOperationError(this.getNode(), `${ERROR_PREFIX}: Unknown operation '${operation}'`);
                     }
                 }
 
-                // Process and add response data
                 const processedData = processResponseData(responseData);
                 returnData.push(...processedData);
-
             } catch (error) {
                 if (this.continueOnFail()) {
                     const errorMessage = error instanceof Error ? error.message : DEFAULT_ERROR_MESSAGE;

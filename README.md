@@ -31,18 +31,11 @@ npm install @wevalu/n8n-nodes-wevalu
 
 ## Operations
 
-### Evaluation Resource
+### WeValu node (Resources & Operations)
 
-- **Get Many**: Retrieve multiple employee evaluations with filtering and pagination
-  - Filter by department ID
-  - Filter by iteration number
-  - Support for pagination (limit/offset)
-  - Option to return all results
-
-- **Get Summary**: Get aggregated statistics across all evaluations
-  - Total evaluations count
-  - Average performance and potential scores
-  - Statistics grouped by iteration
+- Resource: Evaluations
+  - Operation: Get Many — filter by department ID, iteration; limit/offset or return all
+  - Operation: Get Summary — total count, average performance/potential, per-iteration statistics
 
 ## Credentials
 

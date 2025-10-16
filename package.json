@@ -56,7 +56,7 @@
       "dist/credentials/WeValuApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/WeValu/WeValuEvaluations/WeValuEvaluations.node.js"
+      "dist/nodes/WeValu/WeValu.node.js"
     ]
   },
   "devDependencies": {
