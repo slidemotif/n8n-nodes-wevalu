@@ -42,18 +42,19 @@ npm install @wevalu/n8n-nodes-wevalu
 To use this node, you need a WeValu API Key:
 
 1. Log in to your WeValu account
-2. Navigate to **Settings** > **API Keys**
+2. Navigate to **Settings** > **Security** > **API Keys**
 3. Click **Create New API Key**
 4. Give it a name and select the `evaluations:read` scope
 5. Copy the generated API key (you'll only see it once!)
 
 ### Setting up credentials in n8n
 
-1. In n8n, go to **Credentials** > **New**
-2. Search for "WeValu API"
-3. Enter your API Key
-4. (Optional) Change the Base URL if using a custom WeValu instance
-5. Save
+1. Add the **WeValu** node to the canvas and open it.
+2. In **Parameters**, open the **Credential to connect with** dropdown.
+3. Click **Create new credential**.
+4. Enter your **API Key**; optionally set **Base URL** if you use a custom WeValu instance.
+5. Save the credential and select it from the dropdown.
+6. The warning will disappear, and you can run the operation.
 
 ## Compatibility
 
