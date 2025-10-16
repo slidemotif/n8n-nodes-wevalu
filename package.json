@@ -1,6 +1,6 @@
 {
 	"name": "@wevalu/n8n-nodes-wevalu",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "n8n community node for WeValu - Fetch and analyze employee evaluations, performance metrics, and HR data from your WeValu platform.",
 	"keywords": [
 		"n8n-community-node-package",
