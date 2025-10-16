@@ -22,6 +22,14 @@ module.exports = {
 
 	overrides: [
 		{
+			files: ['**/*.{ts,js}'],
+			rules: {
+				'no-trailing-spaces': 'error',
+				'eol-last': ['error', 'always'],
+				'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
+			},
+		},
+		{
 			files: ['package.json'],
 			plugins: ['eslint-plugin-n8n-nodes-base'],
 			extends: ['plugin:n8n-nodes-base/community'],
