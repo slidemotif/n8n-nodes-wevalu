@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog and this project adheres to Semantic Versioning.
 
 ## [0.1.0] - 2025-10-15
+
 ### Added
+
 - Initial public release of `@wevalu/n8n-nodes-wevalu` community node.
-- Unified `WeValu` node with resource `Evaluations` (actions: `getAll`, `getSummary`).
+- Unified `WeValu` node with resource `Evaluation` (actions: `getAll`, `getSummary`).

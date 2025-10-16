@@ -1,74 +1,74 @@
 {
-  "name": "@wevalu/n8n-nodes-wevalu",
-  "version": "0.1.0",
-  "description": "n8n community node for WeValu - Fetch and analyze employee evaluations, performance metrics, and HR data from your WeValu platform.",
-  "keywords": [
-    "n8n-community-node-package",
-    "n8n",
-    "wevalu",
-    "hr",
-    "evaluations",
-    "performance",
-    "employees"
-  ],
-  "license": "MIT",
-  "homepage": "https://github.com/slidemotif/n8n-nodes-wevalu#readme",
-  "author": {
-    "name": "slidemotif",
-    "email": "info@slidemotif.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/slidemotif/n8n-nodes-wevalu.git"
-  },
-  "engines": {
-    "node": ">=20.15"
-  },
-  "type": "commonjs",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "sideEffects": false,
-  "bugs": {
-    "url": "https://github.com/slidemotif/n8n-nodes-wevalu/issues"
-  },
-  "scripts": {
-    "build": "npx rimraf dist && tsc && gulp build:icons",
-    "format": "prettier nodes credentials --write",
-    "lint": "eslint nodes credentials package.json",
-    "lintfix": "eslint nodes credentials package.json --fix",
-    "type-check": "tsc -p tsconfig.json --noEmit",
-    "test": "echo 'No tests yet'",
-    "prepublishOnly": "npm run lint -c .eslintrc.prepublish.js nodes credentials package.json && npm run type-check && npm run build"
-  },
-  "files": [
-    "dist/credentials",
-    "dist/nodes",
-    "dist/index.d.ts",
-    "dist/index.js",
-    "dist/index.js.map"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "n8n": {
-    "n8nNodesApiVersion": 1,
-    "credentials": [
-      "dist/credentials/WeValuApi.credentials.js"
-    ],
-    "nodes": [
-      "dist/nodes/WeValu/WeValu.node.js"
-    ]
-  },
-  "devDependencies": {
-    "@typescript-eslint/parser": "~8.32.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-n8n-nodes-base": "^1.16.3",
-    "gulp": "^5.0.0",
-    "prettier": "^3.5.3",
-    "typescript": "^5.8.2",
-    "rimraf": "^6.0.1"
-  },
-  "peerDependencies": {
-    "n8n-workflow": "*"
-  }
+	"name": "@wevalu/n8n-nodes-wevalu",
+	"version": "0.1.0",
+	"description": "n8n community node for WeValu - Fetch and analyze employee evaluations, performance metrics, and HR data from your WeValu platform.",
+	"keywords": [
+		"n8n-community-node-package",
+		"n8n",
+		"wevalu",
+		"hr",
+		"evaluations",
+		"performance",
+		"employees"
+	],
+	"license": "MIT",
+	"homepage": "https://github.com/slidemotif/n8n-nodes-wevalu#readme",
+	"author": {
+		"name": "slidemotif",
+		"email": "info@slidemotif.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/slidemotif/n8n-nodes-wevalu.git"
+	},
+	"engines": {
+		"node": ">=20.15"
+	},
+	"type": "commonjs",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"sideEffects": false,
+	"bugs": {
+		"url": "https://github.com/slidemotif/n8n-nodes-wevalu/issues"
+	},
+	"scripts": {
+		"build": "npx rimraf dist && tsc && gulp build:icons",
+		"format": "prettier . --write",
+		"lint": "eslint nodes credentials package.json",
+		"lintfix": "eslint nodes credentials package.json --fix",
+		"type-check": "tsc -p tsconfig.json --noEmit",
+		"test": "echo 'No tests yet'",
+		"prepublishOnly": "npm run lint -c .eslintrc.prepublish.js nodes credentials package.json && npm run type-check && npm run build"
+	},
+	"files": [
+		"dist/credentials",
+		"dist/nodes",
+		"dist/index.d.ts",
+		"dist/index.js",
+		"dist/index.js.map"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"credentials": [
+			"dist/credentials/WeValuApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/WeValu/WeValu.node.js"
+		]
+	},
+	"devDependencies": {
+		"@typescript-eslint/parser": "~8.32.0",
+		"eslint": "^8.57.0",
+		"eslint-plugin-n8n-nodes-base": "^1.16.3",
+		"gulp": "^5.0.0",
+		"prettier": "^3.5.3",
+		"typescript": "^5.8.2",
+		"rimraf": "^6.0.1"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
 }

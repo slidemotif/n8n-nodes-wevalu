@@ -33,7 +33,7 @@ npm install @wevalu/n8n-nodes-wevalu
 
 ### WeValu node (Resources & Operations)
 
-- Resource: Evaluations
+- Resource: Evaluation
   - Operation: Get Many — filter by department ID, iteration; limit/offset or return all
   - Operation: Get Summary — total count, average performance/potential, per-iteration statistics
 
@@ -63,7 +63,7 @@ To use this node, you need a WeValu API Key:
 
 ## Resources
 
-* [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
+- [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
 
 ## License
 
